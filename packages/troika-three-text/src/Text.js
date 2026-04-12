@@ -68,7 +68,7 @@ const SYNCABLE_PROPS = [
   'whiteSpace',
   'anchorX',
   'anchorY',
-  'colorRanges',
+  'styleRanges',
   'sdfGlyphSize'
 ]
 
@@ -247,15 +247,14 @@ class Text extends Mesh {
     this.color = null
 
     /**
-     * @member {object|null} colorRanges
-     * WARNING: This API is experimental and may change.
-     * This allows more fine-grained control of colors for individual or ranges of characters,
-     * taking precedence over the material's `color`. Its format is an Object whose keys each
-     * define a starting character index for a range, and whose values are the color for each
-     * range. The color value can be a numeric hex color value, a `THREE.Color` object, or
-     * any of the strings accepted by `THREE.Color`.
+     * @member {object|null} styleRanges
+     * Enables rich-text rendering: keys are starting character indices; values are style objects
+     * applied from that index until the next key override. Supported style properties: `font`
+     * (URL string), `color` (hex/Color/string), `size` (world-unit font size), `valign` (numeric
+     * world-unit Y offset from baseline). Set any property to `null` to
+     * reset it to the text-level default at that character index.
      */
-    this.colorRanges = null
+    this.styleRanges = null
 
     /**
      * @member {number|string} outlineWidth
@@ -417,7 +416,6 @@ class Text extends Mesh {
       } else {
         this._isSyncing = true
         this.dispatchEvent(syncStartEvent)
-
         getTextRenderInfo({
           text: this.text,
           font: this.font,
@@ -435,7 +433,8 @@ class Text extends Mesh {
           overflowWrap: this.overflowWrap,
           anchorX: this.anchorX,
           anchorY: this.anchorY,
-          colorRanges: this.colorRanges,
+          color: this.color,
+          styleRanges: this.styleRanges, // TODO sanitize
           includeCaretPositions: true, //TODO parameterize
           sdfGlyphSize: this.sdfGlyphSize,
           gpuAccelerateSDF: this.gpuAccelerateSDF,
