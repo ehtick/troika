@@ -321,6 +321,8 @@ export class BatchedText extends Text {
         geometry.getAttribute(memberIndexAttrName).setUsage(DynamicDrawUsage);
         geometry.updateAttributeData(glyphIndexAttrName, batchedGlyphIndexes, 1);
         geometry.updateAttributeData(glyphBoundsAttrName, batchedGlyphBounds, 4);
+        geometry.instanceCount = batchedGlyphIndexes.length;
+        geometry.setDrawRange(0, Infinity);
 
         this.updateBounds();
 
