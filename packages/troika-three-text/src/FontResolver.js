@@ -131,7 +131,7 @@ export function createFontResolver(fontParser, unicodeFontResolverClient) {
     if (userFonts && !Array.isArray(userFonts)) {
       userFonts = [userFonts]
     }
-    userFonts = userFonts.slice()
+    userFonts = userFonts.map((f) => typeof f === 'string' ? {src: f} : f)
       // filter by language
       .filter(def => !def.lang || def.lang.test(lang))
       // switch order for easier iteration
@@ -200,7 +200,7 @@ export function createFontResolver(fontParser, unicodeFontResolverClient) {
                   // Check each character to see if this userFont supports it
                   charResolutions[i] = j;
                   // Find default font
-                  const { src, unicodeRange } = userFonts.find(f => f.label === 'default');
+                  const { src, unicodeRange } = userFonts.find(f => f.label === 'default') || userFonts[0] || {};
                   // Filter by optional explicit unicode ranges
                   if (src && (!unicodeRange || isCodeInRanges(codePoint, unicodeRange))) {
                     const fontObj = parsedFonts[src];
