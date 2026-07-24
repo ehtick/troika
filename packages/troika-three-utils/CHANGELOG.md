@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.53.0](https://github.com/protectwise/troika/compare/v0.52.4...v0.53.0) (2026-07-24)
+
+
+### Bug Fixes
+
+* avoid inout params in vertex transform for Safari/ANGLE Metal ([bb05826](https://github.com/protectwise/troika/commit/bb058269ba136558f4381cf3d71da28300fc66ab)), closes [#390](https://github.com/protectwise/troika/issues/390)
+
+
+
+
+
 ## [0.52.4](https://github.com/protectwise/troika/compare/v0.52.3...v0.52.4) (2025-04-02)
 
 
